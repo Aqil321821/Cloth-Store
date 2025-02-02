@@ -9,6 +9,7 @@ function Navigation() {
         <Link to='/' className='logo-container'>
           <Crown className='logo' />
         </Link>
+
         <div className='nav-links-container'>
           <Link className='nav-link' to='/shop'>
             SHOP
