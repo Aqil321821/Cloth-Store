@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { signInWithGooglePopup, signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/Form-input.component';
+import { UserContext } from '../../contexts/user.context';
 import Button from '../button/Button.component';
 import './sign-in-form.styles.scss';
 const defaultFormFields = {
   email: '',
   password: '',
 };
-
 function SignInForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,8 +21,9 @@ function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(response);
+      const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+      setCurrentUser(user);
+      alert(`you are logged as ${user.email}`);
     } catch (error) {
       switch (error.code) {
         case 'auth/invalid-credential':
@@ -40,6 +42,7 @@ function SignInForm() {
 
   const signInWithGoogle = async () => {
     const { user } = await signInWithGooglePopup();
+    // setCurrentUser(user);
     alert(`you logged in as ${user.displayName}`);
   };
 

@@ -7,8 +7,8 @@ const Auth = () => {
     <>
       <h1 className='heading'>Sign In Page</h1>
       <div className='auth-container'>
-        <SignUpForm />
         <SignInForm />
+        <SignUpForm />
       </div>
     </>
   );
