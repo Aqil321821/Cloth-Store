@@ -5,7 +5,6 @@ import './auth.styles.scss';
 const Auth = () => {
   return (
     <>
-      <h1 className='heading'>Sign In Page</h1>
       <div className='auth-container'>
         <SignInForm />
         <SignUpForm />
