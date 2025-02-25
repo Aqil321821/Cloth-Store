@@ -1,0 +1,18 @@
+.auth-container {
+ display: flex;
+  max-width: 900px;
+  margin: 30px auto;
+  column-gap: 150px;
+}
+
+@media (max-width:750px){
+    .auth-container{
+        flex-direction: column;
+          justify-content: center;
+          row-gap: 25px;
+          align-items: center;
+    }
+    html{
+        font-size: 8px;
+    }
+}
