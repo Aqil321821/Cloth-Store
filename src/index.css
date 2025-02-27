@@ -6,11 +6,22 @@
 }
 body {
   font-family: 'Open Sans', serif;
-  padding: .3rem 1rem;
+  padding: .5rem 1.5rem;
 }
 a {
   text-decoration: none;
   color: rgb(74, 74, 74);
 }
 
+@media(max-width: 492px){
+  body{
+  padding: .3rem 1rem;
 
+  }
+}
+@media(max-width: 768px){
+  body{
+  padding: .3rem 1rem;
+
+  }
+}

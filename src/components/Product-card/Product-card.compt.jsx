@@ -1,6 +1,6 @@
 import './product-card.styles.scss';
 
-import Button from '../button/button.compt';
+import Button from '../button/Button.compt';
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
@@ -9,7 +9,7 @@ const ProductCard = ({ product }) => {
       <img src={`${imageUrl}`} alt={`${name}`} />
       <div className='footer'>
         <span className='name'>{name}</span>
-        <spna className='price'>{price}</spna>
+        <span className='price'>{price}$</span>
       </div>
       <Button buttonType='inverted'>Add to Cart</Button>
     </div>
