@@ -1,7 +1,6 @@
-import { useState,useContext } from 'react';
-import { UserContext } from '../../context/UserContext';
+import { useState, } from 'react';
 import {
-  createUserDocFromAuth,
+  
   signInWithGooglePopup,
   signInAuthUserWithemailAndPassword,
 } from '../../utils/firebase/firebase.utils';
@@ -18,7 +17,6 @@ const Signin = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  const {setCurrentUser}=useContext(UserContext)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +27,7 @@ const Signin = () => {
     setFormFields(defaultFormFields);
   };
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
- 
-    await createUserDocFromAuth(user);
+    signInWithGooglePopup();
   };
 
   const handleSubmit = async (e) => {
@@ -39,8 +35,7 @@ const Signin = () => {
     console.log('handle');
 
     try {
-      const {user} = await signInAuthUserWithemailAndPassword(email, password);
-      setCurrentUser(user)
+     await signInAuthUserWithemailAndPassword(email, password);
       resetFormFields();
     } catch (error) {
       if (error.code === 'auth/wrong-password') {

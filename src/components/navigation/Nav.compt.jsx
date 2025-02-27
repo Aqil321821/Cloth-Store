@@ -3,14 +3,9 @@ import { useContext } from 'react';
 import Logo from '../../assets/crown.svg?react';
 import { UserContext } from '../../context/UserContext';
 import { SignOutUser } from '../../utils/firebase/firebase.utils';
-
 import './Nav.styles.scss';
 const Nav = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  const SignOutHandler = async () => {
-    await SignOutUser();
-    setCurrentUser(null);
-  };
+  const { currentUser } = useContext(UserContext);
   return (
     <>
       <div className='navigation'>
@@ -22,7 +17,7 @@ const Nav = () => {
             SHOP
           </Link>
           {currentUser ? (
-            <Link className='nav-link' to='/auth' onClick={SignOutHandler}>
+            <Link className='nav-link' to='/auth' onClick={SignOutUser}>
               SIGN OUT
             </Link>
           ) : (
