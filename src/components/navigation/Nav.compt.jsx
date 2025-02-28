@@ -1,15 +1,15 @@
 import { Outlet, Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Logo from '../../assets/crown.svg?react';
 import { UserContext } from '../../context/UserContext';
 import { SignOutUser } from '../../utils/firebase/firebase.utils';
 import CartIcon from '../cart-icon/Cart-icon.compt';
 import CartDropdown from '../cart-dropdown/Cart-dropdown.compt';
+import { CartContext } from '../../context/CartContext';
 import './Nav.styles.scss';
 const Nav = () => {
   const { currentUser } = useContext(UserContext);
-  const [cartState, setCartState] = useState(false);
-  const dropdownHandler = () => setCartState((prev) => !prev);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
@@ -30,11 +30,11 @@ const Nav = () => {
               SIGN IN
             </Link>
           )}
-          <div onClick={dropdownHandler}>
+          <div>
             <CartIcon />
           </div>
         </div>
-        {cartState && <CartDropdown />}
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </>
