@@ -20,7 +20,10 @@ const Signup = () => {
     const { name, value } = e.target;
 
     setFormFields({ ...formFields, [name]: value });
-  };
+  }
+
+
+  
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };

@@ -8,7 +8,9 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, getDocs } from 'firebase/firestore';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyCqaZfe16NA49JWu5PMQF0Bw32Da0Y4dmU',
   authDomain: 'smit-cloth-store-805b9.firebaseapp.com',
@@ -19,6 +21,8 @@ const firebaseConfig = {
 };
 
 initializeApp(firebaseConfig);
+export const db = getFirestore();
+export const auth = getAuth();
 
 const provider = new GoogleAuthProvider();
 
@@ -26,10 +30,7 @@ provider.setCustomParameters({
   prompt: 'select_account',
 });
 
-export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-
-export const db = getFirestore();
 
 export const createUserDocFromAuth = async (user, addInfo = {}) => {
   if (!user) {
@@ -74,3 +75,27 @@ export const signInAuthUserWithemailAndPassword = async (email, password) => {
 export const SignOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
+
+export const addCollectionAndDocuments = async (collectionName, ObjectsToAdd) => {
+  const collRef = collection(db, collectionName);
+  const batch = writeBatch(db);
+  ObjectsToAdd.forEach((object) => {
+    const docRef = doc(collRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+  await batch.commit();
+  console.log('done');
+};
+
+export const getAllData = async () => {
+  const dataRef = collection(db, 'categories');
+  const snapshot = await getDocs(dataRef);
+
+  const formattedData = snapshot.docs.reduce((acc, doc) => {
+    const data = doc.data();
+    acc[data.title.toLowerCase()] = data;
+    return acc;
+  }, {});
+
+  return formattedData;
+};
