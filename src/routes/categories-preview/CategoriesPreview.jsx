@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from 'react';
 import { CategoriesContext } from '../../context/CategoriesContext';
 import CategoryPreview from '../../components/category-preview-compt/CategoryPreview.compt';
-import './this.styles.scss';
 export const CategoriesPreview = () => {
   const { categoriesMap } = useContext(CategoriesContext);
   const [error, setError] = useState(false);
