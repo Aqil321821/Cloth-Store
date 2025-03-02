@@ -12,3 +12,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media (max-width: 540px) {
+  .buttons-container {
+    flex-direction: column;
+    row-gap: .5rem;
+  }
+}

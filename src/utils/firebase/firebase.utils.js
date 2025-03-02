@@ -92,8 +92,8 @@ export const getAllData = async () => {
   const snapshot = await getDocs(dataRef);
 
   const formattedData = snapshot.docs.reduce((acc, doc) => {
-    const data = doc.data();
-    acc[data.title.toLowerCase()] = data;
+    const { title, items } = doc.data();
+    acc[title.toLowerCase()] = items;
     return acc;
   }, {});
 

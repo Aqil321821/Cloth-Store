@@ -1,7 +1,7 @@
-import { useState,  } from 'react';
+import { useState } from 'react';
 import { createAuthUserWithEmailAndPassword, createUserDocFromAuth } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.compt';
-import Button from '../button/button.compt';
+import Button from '../button/Button.compt';
 
 import './signup-form.styles.scss';
 
@@ -20,10 +20,8 @@ const Signup = () => {
     const { name, value } = e.target;
 
     setFormFields({ ...formFields, [name]: value });
-  }
+  };
 
-
-  
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
