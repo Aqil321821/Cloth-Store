@@ -1,11 +1,7 @@
-import { useState, } from 'react';
-import {
-  
-  signInWithGooglePopup,
-  signInAuthUserWithemailAndPassword,
-} from '../../utils/firebase/firebase.utils';
+import { useState } from 'react';
+import { signInWithGooglePopup, signInAuthUserWithemailAndPassword } from '../../utils/firebase/firebase.utils';
 import FormInput from '../form-input/form-input.compt';
-import Button from '../button/button.compt';
+import Button from '../button/Button.compt';
 import './signin-form.styles.scss';
 import { useNavigate } from 'react-router-dom';
 const defaultFormFields = {
@@ -16,8 +12,7 @@ const defaultFormFields = {
 const Signin = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const navigate=useNavigate()
-
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,19 +23,18 @@ const Signin = () => {
     setFormFields(defaultFormFields);
   };
 
-  
   const signInWithGoogle = async () => {
     signInWithGooglePopup();
-    navigate('/')
+    navigate('/');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-     await signInAuthUserWithemailAndPassword(email, password);
+      await signInAuthUserWithemailAndPassword(email, password);
       resetFormFields();
-      navigate('/')
+      navigate('/');
     } catch (error) {
       if (error.code === 'auth/wrong-password') {
         alert('Incorrect Password');
