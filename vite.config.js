@@ -5,4 +5,10 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   plugins: [react(), svgr()], 
   base:'/',
+  build: {
+    outDir: 'dist',
+  },
+  server: {
+    historyApiFallback: true, // 🔥 Ye line zaroori hai!
+  }
 });
